@@ -18,6 +18,7 @@ import textures.TerrainTexturePack
 import java.util.*
 
 fun main() {
+    println("Loading...")
     DisplayManager.createDisplay()
 
     val loader = Loader()
