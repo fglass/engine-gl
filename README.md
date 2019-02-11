@@ -1,2 +1,2 @@
 # KotlinEngine
-Kotlin OpenGL game engine
+OpenGL game engine written in Kotlin
