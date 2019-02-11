@@ -4,13 +4,13 @@ import entities.Camera
 import entities.Entity
 import entities.Light
 import entities.Player
+import models.ObjLoader
 import models.TexturedModel
 import org.lwjgl.opengl.Display
 import org.lwjgl.util.vector.Vector3f
 import render.DisplayManager
 import render.Loader
 import render.MasterRenderer
-import models.ObjLoader
 import terrain.Terrain
 import textures.ModelTexture
 import textures.TerrainTexture
