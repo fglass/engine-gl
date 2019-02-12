@@ -4,6 +4,7 @@ import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL20
 import org.lwjgl.util.vector.Matrix4f
+import org.lwjgl.util.vector.Vector2f
 import org.lwjgl.util.vector.Vector3f
 import java.io.BufferedReader
 import java.io.FileReader
@@ -66,6 +67,10 @@ abstract class ShaderProgram(vertexFile: String, fragmentFile: String) {
 
     fun loadVector(location: Int, vector: Vector3f) {
         GL20.glUniform3f(location, vector.x, vector.y, vector.z)
+    }
+
+    fun load2DVector(location: Int, vector: Vector2f) {
+        GL20.glUniform2f(location, vector.x, vector.y)
     }
 
     fun loadBoolean(location: Int, value: Boolean) {

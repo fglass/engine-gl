@@ -42,6 +42,7 @@ class EntityRenderer(private val shader: StaticShader, projectionMatrix: Matrix4
             MasterRenderer.disableCulling()
         }
 
+        shader.loadRows(texture.rows)
         shader.loadFakeLighting(texture.useFakeLighting)
         shader.loadShineVariables(texture.shineDamper, texture.reflectivity)
         GL13.glActiveTexture(GL13.GL_TEXTURE0)
@@ -61,5 +62,6 @@ class EntityRenderer(private val shader: StaticShader, projectionMatrix: Matrix4
             entity.position, entity.rotX, entity.rotY, entity.rotZ, entity.scale
         )
         shader.loadTransformationMatrix(transformationMatrix)
+        shader.loadOffset(entity.getTextureOffsetX(), entity.getTextureOffsetY())
     }
 }

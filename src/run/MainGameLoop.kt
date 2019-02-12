@@ -18,7 +18,6 @@ import textures.TerrainTexturePack
 import java.util.*
 
 fun main() {
-    println("Loading...")
     DisplayManager.createDisplay()
 
     val loader = Loader()
@@ -35,13 +34,15 @@ fun main() {
     val terrain = Terrain(0, -1, texturePack, blendMap, "heightMap", loader)
 
     val playerModel = loader.loadToVao(ObjLoader.load("player"))
-    val texturedPlayer = TexturedModel(playerModel, ModelTexture(loader.loadTexture("playerTexture"), reflectivity = 0.1F))
+    val playerTexture = ModelTexture(loader.loadTexture("playerTexture"), reflectivity = 0.1F)
+    val texturedPlayer = TexturedModel(playerModel, playerTexture)
     val player = Player(texturedPlayer, Vector3f(0F, 0F, -50F), 0F, 0F, 0F, 1F)
     val camera = Camera(player)
 
     val fern = loader.loadToVao(ObjLoader.load("fern"))
-    val texture = ModelTexture(loader.loadTexture("fern"), hasTransparency = true, useFakeLighting = true)
-    val texturedFern = TexturedModel(fern, texture)
+    val fernTexture = ModelTexture(loader.loadTexture("fern"), reflectivity = 0.1F, rows = 2,
+                                   hasTransparency = true, useFakeLighting = true)
+    val texturedFern = TexturedModel(fern, fernTexture)
 
     val tree = loader.loadToVao(ObjLoader.load("tree"))
     val texturedTree = TexturedModel(tree, ModelTexture(loader.loadTexture("tree"), reflectivity = 0.1F))
@@ -52,7 +53,7 @@ fun main() {
         var x = random.nextFloat() * 800 - 400
         var z = random.nextFloat() * -400
         var y = terrain.getHeight(x, z)
-        entities.add(Entity(texturedFern, Vector3f(x, y, z), 0F, 0F, 0F, 1F))
+        entities.add(Entity(texturedFern, Vector3f(x, y, z), 0F, 0F, 0F, 1F, random.nextInt(4)))
 
         x = random.nextFloat() * 800 - 400
         z = random.nextFloat() * -400
