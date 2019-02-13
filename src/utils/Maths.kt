@@ -11,6 +11,14 @@ class Maths {
 
     companion object {
 
+        fun createTransformationMatrix(translation: Vector2f, scale: Vector2f): Matrix4f {
+            val matrix = Matrix4f()
+            matrix.setIdentity()
+            Matrix4f.translate(translation, matrix, matrix)
+            Matrix4f.scale(Vector3f(scale.x, scale.y, 1f), matrix, matrix)
+            return matrix
+        }
+
         fun createTransformationMatrix(translation: Vector3f, rx: Float, ry: Float, rz: Float, scale: Float): Matrix4f {
             val matrix = Matrix4f()
             matrix.setIdentity()

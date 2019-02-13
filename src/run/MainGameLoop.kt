@@ -4,9 +4,12 @@ import entities.Camera
 import entities.Entity
 import entities.Light
 import entities.Player
+import gui.GuiRenderer
+import gui.Sprite
 import models.ObjLoader
 import models.TexturedModel
 import org.lwjgl.opengl.Display
+import org.lwjgl.util.vector.Vector2f
 import org.lwjgl.util.vector.Vector3f
 import render.DisplayManager
 import render.Loader
@@ -61,6 +64,11 @@ fun main() {
         entities.add(Entity(texturedTree, Vector3f(x, y, z), 0F, 0F, 0F, 5F))
     }
 
+    val sprites = ArrayList<Sprite>()
+    val sprite = Sprite(loader.loadTexture("health"), Vector2f(-0.7F, -0.8F), Vector2f(0.15F, 0.17F))
+    sprites.add(sprite)
+    val guiRenderer = GuiRenderer(loader)
+
     while (!Display.isCloseRequested()) {
         renderer.processTerrain(terrain)
 
@@ -73,9 +81,11 @@ fun main() {
         }
 
         renderer.render(light, camera)
+        guiRenderer.render(sprites)
         DisplayManager.updateDisplay()
     }
 
+    guiRenderer.cleanUp()
     renderer.cleanUp()
     loader.cleanUp()
     DisplayManager.closeDisplay()

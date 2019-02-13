@@ -21,13 +21,20 @@ class Loader {
     }
 
     fun loadToVao(positions: FloatArray, textureCoords: FloatArray, normals: FloatArray, indices: IntArray): RawModel {
-        val vaoId = createVAO()
+        val vaoId = createVao()
         bindIndicesBufffer(indices)
         storeDataInAttribList(0, 3, positions)
         storeDataInAttribList(1, 2, textureCoords)
         storeDataInAttribList(2, 3, normals)
         unbindVAO()
         return RawModel(vaoId, indices.size)
+    }
+
+    fun loadToVao(positions: FloatArray): RawModel {
+        val vaoId = createVao()
+        storeDataInAttribList(0, 2, positions)
+        unbindVAO()
+        return RawModel(vaoId, positions.size / 2)
     }
 
     fun loadTexture(filename: String): Int {
@@ -55,7 +62,7 @@ class Loader {
         }
     }
 
-    private fun createVAO(): Int {
+    private fun createVao(): Int {
         val vaoId = GL30.glGenVertexArrays()
         vaos.add(vaoId)
         GL30.glBindVertexArray(vaoId)
